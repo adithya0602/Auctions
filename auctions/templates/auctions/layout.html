@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="b">AUCTION AND BIDING</h1>
+        <div class="b1">
+            {% if user.is_authenticated %}
+                SIGNED AS  <strong>{{ user.username }}</strong>.
+            {% else %}
+                NOT SIGNED IN
+            {% endif %}
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">ACTIVE LISTINGS</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_listing' %}">CREATE LISTINGS</a>
+                </li>     
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' %}">WATCHLIST</a>
+                </li>                            
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">REGISTER</a>
+                </li>
+            {% endif %}
+        </ul>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
