@@ -31,6 +31,7 @@ LOGIN_URL = 'register'
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'auctions',
     'django.contrib.admin',
     'django.contrib.auth',
